@@ -1,0 +1,19 @@
+options:
+    prefix: Test1
+
+
+
+command /shop:
+    trigger:
+        open virtual chest inventory with 3 rows named "hi" to player
+        shop(player, 10, 300, Grass Block, 4, "&aGrass Block")
+	#shop(player, format slot, cost, item, how much you get, "name of item")  when you put the name of the item you need quotes 
+
+function shop(p: player, i: integer, c: integer, it: itemtype, a: integer, m: string):
+    format gui slot {_i} of {_p} with {_a} of {_it} named "%{_m}%" with lore "&a%{_c}%" to run:
+        if {_p}'s balance is greater than {_c}:
+            remove {_c} from {_p}'s balance
+            give {_a} of {_it} to {_p}
+            send action bar "&d@{prefix} &aPurchase Completed." to {_p}
+        else:
+            send action bar "&d@{prefix} &cPurchase Failed." to {_p}
