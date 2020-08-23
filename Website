@@ -1,0 +1,30 @@
+<head>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+</head>
+<nav class="navbar navbar-expand-lg navbar-light bg-ligh">
+  <a class="navbar-brand" href="/">SkySkript [Beta Release]</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <a class="nav-link active" href="/">Home <span class="sr-only">(current)</span></a>
+      <a class="nav-link" href="/">Skripts</a>
+      <a class="nav-link" href="#">Forums</a>
+      <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Coming Soon</a>
+    </div>
+  </div>
+</nav>
+<div class="text-center">
+<img src="https://serving.photos.photobox.com/252514859011f892a305406eb6b0f6bb0d0ed0f38dfaad2e6b6ecb1efe0bc07be895b9a0.jpg" alt="Minecraft 4k shaders mountain x plains biome" style="width:1100px;height:600px;">
+</div>
+<div class="card">
+<div class="card text-center">
+
+  <h5 class="card-header">About Our Goals and Contacts</h5>
+  <div class="card-body">
+    <h5 class="card-title"></h5>
+    <h6 class="card-text">Skyskrip’s mojor goal is to help people out, for example, the people who can only use 12 plugins, or people who just want to try new things! We are here for you. Join our community today! You can find me on the minehut forums (forums.minehut.com) and you can also email me at carson.astor@gmail.com, for more information. Oh! You can also click on the chat icon in the bottom right and talk to a person for more help.</h6>
+    <a href="#" class="btn btn-primary">Go somewhere</a>
+  </div>
+</div>
