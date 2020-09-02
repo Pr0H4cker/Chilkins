@@ -1,0 +1,61 @@
+options:
+	permission: memees.admin
+	no-permission: &7You must be &c&lADMIN &7or higher to use this command!
+	prefix: &6&lB&e&lP &8| &7
+command /backpack [<text>] [<offlineplayer>] [<integer>]:
+	permission: {@permission}
+	permission message: {@no-permission}
+	trigger:
+		if arg 1 is set:
+			if arg 1 is "give":
+				if arg 3 is set:
+					if arg 3 < 7:
+						add 1 to {memees.bp.num}
+						set {_p} to "GreatCode" parsed as offlineplayer
+						add "&7Size: %arg 3%" to {_l::*}
+						add "&7ID: &e%{memees.bp.num}%" to {_l::*}
+						add ({_p}'s skull) named "&6Backpack" with lore {_l::*} to arg 2's inventory 
+						send "{@prefix}&eGiven &71x Backpack with &a%arg 3% &arows&7 to %arg 2%"
+						send "{@prefix}You now have &e1x Backpack &7(Size: %arg 3%&7)" to arg 2
+					else:
+						send "{@prefix}&cCorrect Usage: /backpack Give %arg 2%&c [Size 1-6]"
+				else:
+					send "{@prefix}&cCorrect Usage: /backpack Give [Player] [Size 1-6]"
+			else:
+				send "{@prefix}&cCorrect Usage: /backpack Give [Player] [Size 1-6]"
+		else:
+			send "&7Running &6Backpacks &7made by &bmemees &7& &dCorinna"
+			send "&7Version: &cBETA 1.0"
+on right click:
+	if name of player's tool contains "Backpack":
+		cancel event
+		set {_1} to uncolored 1st line of lore of player's tool
+		replace all "Size: " in {_1} with ""
+		set {_2} to uncolored 2nd line of lore of player's tool
+		replace all "ID: " in {_2} with ""
+		if {_1} is set:
+			if {_2} is set:
+				open chest inventory with ({_1} parsed as integer) rows named "&6&lBACKPACK &8| &cID: %{_2}%" to player
+				set {_n} to 0
+				loop {memees.backpacks.items.%{_2}%::*}:
+					set slot {_n} of player's current inventory to loop-value
+					add 1 to {_n}
+				set {memees.backpacks.open::%player%} to {_2}
+			else:
+				send "{@prefix} &cThis backpack doesn't have a valid ID."
+				send "&cContact an admin"
+		else:
+			send "{@prefix} &cThis backpack doesn't have a valid size."
+			send "&cContact an admin"
+on inventory click:
+	if {memees.backpacks.open::%player%} is set:
+		if name of event-slot contains "&6&lBACKPACK":
+			cancel event
+			send "&cDon't try to put backpacks inside other backpacks! It could be lost forever."
+on inventory close:
+	if {memees.backpacks.open::%player%} is set:
+		loop 54 times:
+			set {memees.backpacks.items.%{memees.backpacks.open::%player%}%::%loop-number - 1%} to slot "%loop-number - 1%" parsed as an integer of current inventory of player
+		delete {memees.backpacks.open::%player%}
+			
+
