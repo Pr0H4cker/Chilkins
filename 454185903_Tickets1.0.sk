@@ -1,0 +1,261 @@
+# Skript Made By Practicyn
+# Copyright @ PracticynLLC
+
+#==========================================================================================================================================================================================|+|>
+#                                                                                                                                                                         ==========)+(|+|>
+#=========================================================================================================================================================================================|
+#                                                                                    TICKETS
+#=========================================================================================================================================================================================|
+#                                                                                                                                                                         ==========)+(|+|>
+#==========================================================================================================================================================================================|+|>
+
+#=======================================|
+OPTIONS:
+#=======================================|
+
+    Prefix: &9Ticket System> #Prefix of all tickets messages
+    Version: 1.0
+    NoPermission: &9&lE&r&9rror> &7You don't have the permission to execute this command. # No Permission error message
+
+#=======================================|
+#Config System | Coming Soon !
+#=======================================|
+
+#
+#:>
+#
+
+#=========================================================================================================================================================#
+#                                                                         Commands                                                                        #
+#=========================================================================================================================================================#
+                                                                                                                                                       
+command /ticket [<text>] [<text>] [<text>]:                                                                                                               
+    trigger:                                                                                                                                              
+        if player has permission "ticket.help":                                                                                                           
+            if arg-1 isn't set:                                                                                                                           
+                execute player command "/ticket help"                                                                                                     
+                stop                                                                                                                                      
+            if arg-1 is "help":
+                message ""
+                message ""
+                message ""
+                message ""
+                message "                              &c&lTICKETS"
+                message "&3Commands:"
+                message ""
+                message "    &7/ticket help &9: &bShow the help menu"
+                message "    &7/ticket create bug/addon (text) &9: &bCreate a new ticket"
+                if player has permission "intelcore.ticket.answer":
+                    message "    &7/ticket read (ID) &9: &bRead a ticket"
+                    message "    &7/ticket close (ID) &9: &bClose a ticket"
+                    message "    &7/ticket check &9: &bCheck all the opened tickets"
+                message ""
+                message "&7Coded by &6Practicyn &7Version: &c1.0"
+                stop
+        else:
+            message " {@NoPermission}"
+            stop
+        if player has permission "ticket.create":
+            if arg-1 is "create":
+                if arg-2 isn't set:
+                    message " {@Prefix} &7You need to set the type of the ticket that you want create! Ex: &c/ticket create Bug/Addon Text"
+                    stop
+                if arg-2 is "Bug" or "Addon":
+                    if arg-2 is "Bug":
+                        if arg-3 is set:
+                            log "%player% reported this bug: %arg-3%" to "Bugs.log"
+                            message ""
+                            message ""
+                            message ""
+                            message ""
+                            message "                          &a&lTICKET SENT"
+                            message "&3Info:"
+                            message ""
+                            message "&7Type: &c%arg-2%"
+                            message "&7Time: &9%now%"
+                            message "&7Status: &aOpen"
+                            message ""
+                            message "&7Text:"
+                            message "&b%arg-3%"
+                            message ""
+                            set {_ID} to (size of {ticket.player::*})+1
+                            set {ticket.ID::%{_ID}%} to {_ID}
+                            set {ticket.player::%{_ID}%} to player
+                            set {ticket.type::%{_ID}%} to arg-2
+                            set {ticket.time::%{_ID}%} to "%now%"
+                            set {ticket.status::%{_ID}%} to "&aOpen"
+                            set {ticket.text::%{_ID}%} to arg-3
+                            loop all players:
+                                if loop-player has permission "ticket.check":
+                                    send "" to loop-player
+                                    send "" to loop-player
+                                    send "" to loop-player
+                                    send "" to loop-player
+                                    send "                           &c&lNEW TICKET" to loop-player
+                                    send "&3Info:" to loop-player
+                                    send "" to loop-player
+                                    send "&cID: &c%{ticket.ID::%{_ID}%}%" to loop-player
+                                    send "&7Type: &c%{ticket.type::%{_ID}%}%" to loop-player
+                                    send "&7Sent by: &b%{ticket.player::%{_ID}%}%" to loop-player
+                                    send "&7Time: &9%{ticket.time::%{_ID}%}%" to loop-player
+                                    send "&7Status: %{ticket.status::%{_ID}%}%" to loop-player
+                                    send "&7Do &b/ticket read %{ticket.ID::%{_ID}%}%" to loop-player
+                                    send "" to loop-player
+                        else:
+                            message " {@Prefix} &7You need to write the reason of the ticket."
+                            stop
+                    else:
+                        if arg-2 is "Addon":
+                            if arg-3 is set:
+                                log "%player% has this suggestion: %arg-3%" to "Addons.log"
+                                message ""
+                                message ""
+                                message ""
+                                message ""
+                                message "                          &a&lTICKET SENT"
+                                message "&3Info:"
+                                message ""
+                                message "&7Type: &c%arg-2%"
+                                message "&7Time: &9%now%"
+                                message "&7Status: &aOpen"
+                                message ""
+                                message "&7Text:"
+                                message "&b%arg-3%"
+                                message ""
+                                set {_ID} to (size of {ticket.player::*})+1
+                                set {ticket.ID::%{_ID}%} to {_ID}
+                                set {ticket.player::%{_ID}%} to player
+                                set {ticket.type::%{_ID}%} to arg-2
+                                set {ticket.time::%{_ID}%} to "%now%"
+                                set {ticket.status::%{_ID}%} to "&aOpen"
+                                set {ticket.text::%{_ID}%} to arg-3 
+                                loop all players:
+                                    if loop-player has permission "ticket.check":
+                                        send "" to loop-player
+                                        send "" to loop-player
+                                        send "" to loop-player
+                                        send "" to loop-player
+                                        send "                           &c&lNEW TICKET" to loop-player
+                                        send "&3Info:" to loop-player
+                                        send "" to loop-player
+                                        send "&cID: &c%{ticket.ID::%{_ID}%}%" to loop-player
+                                        send "&7Type: &c%{ticket.type::%{_ID}%}%" to loop-player
+                                        send "&7Sent by: &b%{ticket.player::%{_ID}%}%" to loop-player
+                                        send "&7Time: &9%{ticket.time::%{_ID}%}%" to loop-player
+                                        send "&7Status: %{ticket.status::%{_ID}%}%" to loop-player
+                                        send "&7Do &b/ticket read %{ticket.ID::%{_ID}%}%" to loop-player
+                                        send "" to loop-player
+                            else:
+                                message " {@Prefix} &7You need to write the reason of the ticket."
+                                stop
+                        else:
+                            make player execute command "/ticket help"
+                            stop
+                else:
+                    make player execute command "/ticket help"
+                    stop
+        else:
+            message " {@NoPermission}"
+            stop
+        if player has permission "ticket.check":
+            if arg-1 is "read":
+                if arg-2 is set:
+                    set {_ID} to arg-2 parsed as number
+                    if {_ID} isn't set:
+                        message " {@Prefix} &7You need to write the correct ID of the ticket."
+                        stop
+                    else:
+                        if {ticket.player::%{_ID}%} isn't set:
+                            message " {@Prefix} &7This ticket doesn't exist."
+                            stop
+                    if {ticket.player::%{_ID}%} is set:
+                        if {ticket.supporter::%{_ID}%} is set:
+                            message ""
+                            message ""
+                            message "                            &c&lTICKET  N.&c%{ticket.ID::%{_ID}%}%"
+                            message "&3Info:"
+                            message ""
+                            message "&cID: &c%{ticket.ID::%{_ID}%}%"
+                            message "&7Type: &c%{ticket.type::%{_ID}%}%"
+                            message "&7Sent by: &b%{ticket.player::%{_ID}%}%"
+                            message "&7Time: &9%{ticket.time::%{_ID}%}%"
+                            message "&7Status: %{ticket.status::%{_ID}%}%"
+                            message "&7Supporter: &a%{ticket.supporter::%{_ID}%}%"
+                            message "&7Text:"
+                            message "&b%{ticket.text::%{_ID}%}%"
+                            message ""
+                            wait 2 seconds
+                            message " {@Prefix} &7This ticket already have a supporter."
+                            stop
+                        else:
+                            set {ticket.supporter::%{_ID}%} to player
+                            set {ticket.supporter.time::%{_ID}%} to "%now%"
+                            message ""
+                            message ""
+                            message "                            &c&lTICKET  N.&c%{ticket.ID::%{_ID}%}%"
+                            message "&3Info:"
+                            message ""
+                            message "&cID: &c%{ticket.ID::%{_ID}%}%"
+                            message "&7Type: &c%{ticket.type::%{_ID}%}%"
+                            message "&7Sent by: &b%{ticket.player::%{_ID}%}%"
+                            message "&7Time: &9%{ticket.time::%{_ID}%}%"
+                            message "&7Status: %{ticket.status::%{_ID}%}%"
+                            message "&aYou're now the supporter."
+                            message "&7Text:"
+                            message "&b%{ticket.text::%{_ID}%}%"
+                            message ""
+                            wait 2 seconds
+                            message " {@Prefix} &7You're now the supporter of this ticket."
+                            message " {@Prefix} &7You're ticket was read by &b%{ticket.supporter::%{_ID}%}% &7at &9%{ticket.supporter.time::%{_ID}%}%&7." to {ticket.player::%{_ID}%}
+                            message " {@Prefix} &cThank's for contacting us." to {ticket.player::%{_ID}%}
+                            stop
+                else:
+                    message " {@Prefix} &7You need to write the correct ID of the ticket."
+                    stop
+            else:
+                if arg-1 is "close":
+                    if arg-2 is set:
+                        set {_ID} to arg-2 parsed as number
+                        if {_ID} isn't set:
+                            message " {@Prefix} &7You need to write the correct ID of the ticket."
+                            stop
+                        else:
+                            if {ticket.player::%{_ID}%} isn't set:
+                                message " {@Prefix} &7This ticket doesn't exist."
+                                stop
+                        if {ticket.status::%{_ID}%} is "&aOpen":
+                            if {ticket.supporter::%{_ID}%} is set:
+                                message " &9Ticket System> &7You close the N.&c%{ticket.ID::%{_ID}%}% &7ticket created &9%{ticket.time::%{_ID}%}%&7."
+                                message " &9Ticket System> &7Closed the N.&c%{ticket.ID::%{_ID}%}% &7ticket by &b%{ticket.supporter::%{_ID}%}%&7 created &9%{ticket.time::%{_ID}%}%&7." to {ticket.player::%{_ID}%}
+                                clear {ticket.ID::%{_ID}%}
+                                clear {ticket.player::%{_ID}%}
+                                clear {ticket.supporter::%{_ID}%}
+                                clear {ticket.supporter.time::%{_ID}%}
+                                delete {ticket.ID::%{_ID}%}
+                                delete {ticket.player::%{_ID}%}
+                                delete {ticket.supporter::%{_ID}%}
+                                delete {ticket.supporter.time::%{_ID}%}
+                                stop
+                            else:
+                                message " {@Prefix} &7You can't close this ticket because no one have already read this."
+                                stop
+                else:
+                    if arg-1 is "check":
+                        if {ticket.ID::*} isn't set:
+                            message " {@Prefix} &7There isn't any tickets."
+                            stop
+                        send " {@Prefix} &e*&aOpen&e* &cID: &7[&c%{ticket.ID::*}%&7]"
+                        stop
+        else:
+            message " {@NoPermission}"
+            stop
+            
+#====================================================#
+#                 Join Autocheck                     #
+#====================================================#
+#                                                    #
+on join:                                             #
+    if player has permission "ticket.check":         #
+        wait 1 second                                #
+        make player execute command "/ticket check"  #
+#====================================================#
