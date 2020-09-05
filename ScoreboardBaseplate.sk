@@ -1,0 +1,14 @@
+every 5 seconds:
+    loop all players:
+        wipe loop-player's sidebar
+        set name of sidebar of loop-player to "&6&lAchieved &7(1.0)"
+        set score "&3" in sidebar of loop-player to 9
+        set score "&7&lPlayer" in sidebar of loop-player to 8
+        set score "&8• &7Name: &6%loop-player%" in sidebar of loop-player to 7
+        set score "&8• &7Rank: &6%loop-player's prefix%" in sidebar of loop-player to 6
+        set score "&5" in sidebar of loop-player to 5
+        set score "&7&lServer" in sidebar of loop-player to 4
+        set score "&8• &7Online: &7(&f%amount of players%/%maximum players%&7)" in sidebar of loop-player to 3
+        set score "&8• &7TPS: &7%tps%" in sidebar of loop-player to 2
+        set score "&0" in sidebar of loop-player to 1
+        set score "&7&oachieved.minehut.gg" in sidebar of loop-player to 0
