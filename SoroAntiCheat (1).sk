@@ -1,0 +1,68 @@
+options:
+	bypassperm: true #true/false (Default/Suggested is True)
+	checkinterval: 15 #in seconds (Default/Suggested is 15)
+variables:
+	{macro.%player%} = 0
+on leftclick:
+	add 1 to {click.%player%}
+	if {click.%player%} >= 24:
+		kick the player due to "&eSoro AntiCheat &7>> &eAutoClicking/Macro"
+every 1 seconds:
+	loop all players:
+		clear {click.%loop-player%}
+on chat:
+	if player is sneaking:
+		kick the player due to "&eSoro AntiCheat &7>> &eAutoSneak"
+on inventory open:
+	if player is sneaking:
+		kick the player due to "&eSoro AntiCheat &7>> &eAutoSneak"
+on sign change:
+	if player is sneaking:
+		kick the player due to "&eSoro AntiCheat &7>> &eAutoSneak"
+on shoot:
+	if {bow1.%shooter%} is not set:
+		set {bow3.%shooter%} to now
+	else:
+		set {bow2.%shooter%} to difference between {bow3.%shooter%} and now
+		if {bow2.%shooter%} is greater than 0.1:
+			kick shooter due to "&eSoro AntiCheat &7>> &eFastBow"
+			delete {bow3.%shooter%}
+			delete {bow2.%shooter%}
+on damage:
+	if attacker is a player:
+		if attacker's gamemode is survival:
+			if distance between attacker and victim is greater than 3:
+				kick the attacker due to "&eSoro AntiCheat &7>> &eReach"
+every 4 seconds:
+	set {check} to true
+	wait 1 second
+	set {check} to false
+	loop all players:
+		#delete {click.%loop-player%}
+on left click:
+	{check} is true
+	add 1 to {click.%player%}
+	{click.%player%} > 24
+	kick the player due to "&eSoro AntiCheat &7>> &eKillaura"
+on leftclick:
+	add 1 to {click.%player%}
+	if {click.%player%} >= 30:
+		cancel event
+ 
+on damage:
+	if attacker is a player:
+		if victim is a player:
+			if attacker's gamemode is survival or adventure:
+				# [SmartFix] TODO
+ 
+			set {_reach} to distance between attacker and victim
+			if {_reach} is greater than 3:
+				add 1 to {alert.reach.%attacker%}
+				loop all players:
+					if loop-player has the permission "Anticheat.sk":
+						send message " " to loop-player
+			if {alert.reach.%attacker%} = 1:
+				kick the attacker due to "&eSoro Anticheat &7>> Reach"
+on walk:
+	if player's speed is 3:
+		kick player due to "&eSoro AntiCheat &7>> &eSpeed/Fly"
